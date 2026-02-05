@@ -23,7 +23,7 @@ const articleSchema = new mongoose.Schema({
         enum: ['draft', 'published'],
         default: 'draft'
     },
-    // Reference to Category Model (The Relationship)
+    
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',

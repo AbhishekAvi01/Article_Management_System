@@ -1,7 +1,6 @@
 const Category = require('../models/Category');
 
-// @desc    Create a new category
-// @route   POST /api/categories
+
 exports.createCategory = async (req, res) => {
     try {
         const { name, slug, description } = req.body;
@@ -20,8 +19,6 @@ exports.createCategory = async (req, res) => {
     }
 };
 
-// @desc    Get all categories
-// @route   GET /api/categories
 exports.getCategories = async (req, res) => {
     try {
         const categories = await Category.find();

@@ -11,13 +11,13 @@ exports.createArticle = async (req, res) => {
     }
 };
 
-// @desc    Get All Articles (with Filtering & Category Details)
+
 // @route   GET /api/articles?category=slug
 exports.getArticles = async (req, res) => {
     try {
         let query;
 
-        // Agar query mein category slug hai, toh filter karo
+        
         if (req.query.category) {
             query = Article.find().populate({
                 path: 'category',
@@ -29,7 +29,7 @@ exports.getArticles = async (req, res) => {
 
         const articles = await query;
 
-        // Agar category filter kiya hai aur category nahi mili toh empty array dikhega
+        
         const filteredArticles = articles.filter(art => art.category !== null);
 
         res.status(200).json({
@@ -61,8 +61,8 @@ exports.getArticle = async (req, res) => {
 exports.updateArticle = async (req, res) => {
     try {
         const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
-            new: true, // Updated object return karega
-            runValidators: true // Schema rules check karega
+            new: true, 
+            runValidators: true 
         });
 
         if (!article) {
@@ -99,7 +99,7 @@ exports.getStats = async (req, res) => {
         const stats = await Article.aggregate([
             {
                 $facet: {
-                    // 1. Total, Published, and Draft counts
+                    
                     overview: [
                         {
                             $group: {
@@ -115,7 +115,7 @@ exports.getStats = async (req, res) => {
                         },
                         { $project: { _id: 0 } }
                     ],
-                    // 2. Articles per Category
+                    
                     byCategory: [
                         {
                             $group: {
@@ -125,7 +125,7 @@ exports.getStats = async (req, res) => {
                         },
                         {
                             $lookup: {
-                                from: "categories", // Category collection se join
+                                from: "categories", 
                                 localField: "_id",
                                 foreignField: "_id",
                                 as: "categoryDetails"
