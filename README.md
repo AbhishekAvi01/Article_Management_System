@@ -67,7 +67,23 @@ I've added Global Error Handling to ensure the server doesn't crash even if ther
 
 
 
+Quick Testing Guide (Postman)
+To see the system in action, follow these simple steps:
 
+Create a Category: First, hit POST /api/categories to create a category (e.g., "Technology").
+
+Copy the ID: From the response, copy the _id of the new category.
+
+Create an Article: Use that ID in the category field when you POST /api/articles.
+
+Check Stats: Hit GET /api/articles/stats to see how the system automatically updates the dashboard data!
+
+ Developer Notes
+Mongoose Population: I used .populate() to ensure that when you fetch an article, you get the full category name and slug instead of just a random ID.
+
+Slug-based Filtering: Filtering is implemented via slugs (e.g., ?category=tech) because it's better for SEO and much more human-readable.
+
+Global Error Handling: I've added a centralized error layer to handle unhandled rejections, ensuring the server stays live even with bad input.
 
 
 
