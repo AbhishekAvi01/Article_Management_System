@@ -13,13 +13,13 @@ const categorySchema = new mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true,
-        index: true // Fast searching ke liye indexing
+        index: true 
     },
     description: {
         type: String,
         maxlength: [200, 'Description cannot be more than 200 characters']
     },
-    // Image field professionally added
+    
     image: { 
         url: String, 
         public_id: String 
