@@ -1,4 +1,125 @@
  Project Overview
+----------------------
+ Article Management System ( Backend)
+A production-ready REST API built with Node.js, Express, and MongoDB. This engine now supports Cloud-based Image Uploads for both Articles and Categories.
+ 
+--------------------------------------------
+ Features
+ ---------
+ 1) Article & Media Management: Full CRUD operations for articles, now with Cloudinary-powered image uploads.
+
+2) Smart & Visual Categories: Articles are linked to categories, and categories now support representative icons/images.
+
+3) Dynamic Slug Filtering: Filter articles instantly by passing a category slug in the URL (SEO-friendly).
+
+4) Pro Admin Stats: A specialized dashboard endpoint using MongoDB Aggregation to calculate totals, status counts, and category breakdowns.
+
+5) Clean & Scalable Architecture: Strictly follows the MVC (Model-View-Controller) pattern for maintainable and bug-free code.
+
+6) Automated Cleanup: System automatically deletes old images from the cloud when an article/category is removed or updated.
+
+7) Security Suite: Integrated Helmet for secure headers and CORS for safe cross-origin requests.
+
+-----------------------------------------------------
+Environment Setup
+----------------
+PORT=5000
+NODE_ENV=development
+MONGO_URI=your_mongodb_connection_string
+
+# Cloudinary Credentials
+CLOUDINARY_CLOUD_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+----------------------------------------------
+
+
+Installation & Start
+------------------
+npm install
+npm start
+----------------
+
+
+API Reference
+--------------
+Method	     Endpoint	Body        Type	       Description
+GET	         /api/articles	      N/A	         Fetch all (Use ?category=slug to filter)
+POST	       /api/articles	      form-data	    Create article with image 
+PUT	         /api/articles/:id	  form-data	   Update article & replace image
+DELETE	     /api/articles/:id	  N/A	         Delete article (Auto-removes image)
+GET	        /api/articles/stats	  N/A	          Dashboard Statistics Dashboard 
+--------------------------
+
+
+Categories
+----------
+Method    Endpoint,           Body Type,     Description
+POST     /api/categories,      form-data,     Create a new category with an icon/image 
+GET       /api/categories,     N/A,           List all available categories
+GET      /api/categories/:id,  N/A,           Get details of a specific category
+PUT      /api/categories/:id,  form-data,     Update category details or replace the icon 
+DELETE   /api/categories/:id,  N/A,           Remove a category (Auto-deletes image from
+                                              Cloudinary) 
+ -------------------------------------------------------------
+
+
+ Postman Testing Guide (CRUCIAL)
+ ------------------------
+ Since we are now handling file uploads, RAW JSON will not work for create/update.
+
+   1) Set method to POST or PUT.
+   2) Go to the Body tab and select form-data.
+   3) Add the following keys:
+      image: Set type to File and upload your image.
+      title, slug, content, status, category: Set type to Text.
+   4) Hit Send and check the success: true response!
+--------------------------------------------
+
+Developer Notes
+-------------
+1) Reusability: I used a centralized cloudinary.js config to handle uploads for both Models.
+2) SEO & UX: Slugs are indexed for fast searching and better SEO performance.
+3) Error Handling: Centralized error layer catches duplicate slugs and missing files.
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- Project Overview
 The goal of this project was to create a robust engine that handles articles and categories dynamically. It’s not just a basic CRUD app; it includes advanced features like filtering and a data-rich dashboard statistics API.
 
 
@@ -129,4 +250,4 @@ Method,  Endpoint,           Description
 GET:    /api/articles,        Fetch all articles
 GET:    /api/articles/stats,  Dashboard statistics
 POST:   /api/categories,     Create a new category
-PUT:    /api/articles/:id,    Update an article -->
+PUT:    /api/articles/:id,    Update an article --> -->
