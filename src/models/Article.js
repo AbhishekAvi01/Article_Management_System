@@ -23,6 +23,10 @@ const articleSchema = new mongoose.Schema({
         enum: ['draft', 'published'],
         default: 'draft'
     },
+    image: { 
+    url: String, 
+    public_id: String 
+   },
     
     category: {
         type: mongoose.Schema.Types.ObjectId,
